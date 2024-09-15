@@ -20,6 +20,9 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/userdash" element={<UserRouteProtect><Userdash /></UserRouteProtect>} />
       <Route path="/admin" element={<AdminRouteProtect><AdminDash /></AdminRouteProtect>} />
+      <Route path="/admin/category" element={<AdminRouteProtect><div>category</div></AdminRouteProtect>} />
+      <Route path="/admin/quiz" element={<AdminRouteProtect><div>quiz</div></AdminRouteProtect>} />
+      <Route path="/admin/question" element={<AdminRouteProtect><div>question</div></AdminRouteProtect>} />
       <Route path="/userdash/category/:id" element={<UserRouteProtect><Category /></UserRouteProtect>} />
       <Route path="/userdash/quiz" element={<UserRouteProtect><Quiz /></UserRouteProtect>} />
       <Route path="/userdash/quiz/:id" element={<UserRouteProtect><QuizById /></UserRouteProtect>} />
