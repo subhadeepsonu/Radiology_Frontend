@@ -5,12 +5,14 @@ import { Graph2 } from "@/components/userDash/graph2";
 import { Graph3 } from "@/components/userDash/graph3";
 import MoreQuizs from "@/components/userDash/morequiz";
 import RecommendedQuizs from "@/components/userDash/recommendedQuestions";
+import UserSideBar from "@/components/userDash/userSideBard";
 
 
 export default function Userdash() {
 
     return (
         <div className="pt-20 min-h-screen w-full flex flex-col justify-around items-center ">
+            <UserSideBar />
         <PerformanceCard></PerformanceCard>
         <Graph2></Graph2>
         <RecommendedQuizs></RecommendedQuizs>

@@ -37,7 +37,7 @@ export default function NavBar() {
     },
     })
   return (
-    <div className="h-20 w-full backdrop-blur-sm bg-purple-500/25 z-10 shadow-md shadow-purple-200 fixed top-0 flex justify-between items-center px-5">
+    <div className="h-16 w-full backdrop-blur-sm bg-purple-300 z-10  shadow-purple-200 fixed top-0 flex justify-between items-center px-5">
       {open && <PopupLogin open={open} setOpen={setOpen} />}
       {openSignup && <PopupSignin open={openSignup} setOpen={setOpenSignup} />}
       <Link to="/">
@@ -46,8 +46,8 @@ export default function NavBar() {
         </div>
       </Link>
       <div className=" flex justify-around items-center h-full">
+       
         {auth.user ? (
-            
           <Button disabled={MutateLogout.isPending} onClick={() => {
                 MutateLogout.mutate()
           }}>Logout</Button>
@@ -58,6 +58,7 @@ export default function NavBar() {
           <Button onClick={() => setOpenSignup(true)}>Signup</Button>
           </div>
         )}
+
       </div>
     </div>
   );

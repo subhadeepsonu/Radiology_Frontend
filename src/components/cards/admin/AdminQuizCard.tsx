@@ -1,10 +1,10 @@
 
 import { useState } from "react";
-import ConfirmAlert from "../Alerts/ConfirmAlert";
-import { Button } from "../ui/button";
-import FormPopUp from "../Alerts/FormPopUp";
-import EditQuizForm from "../forms/EditQuiz";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import ConfirmAlert from "@/components/Alerts/ConfirmAlert";
+import FormPopUp from "@/components/Alerts/FormPopUp";
+import EditQuizForm from "@/components/forms/EditQuiz";
 
 export default function AdminQuizCard(props:{
     imgurl:string,
