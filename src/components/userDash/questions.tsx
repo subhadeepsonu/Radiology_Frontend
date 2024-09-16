@@ -35,7 +35,7 @@ export default function QuestionsPage(props:{
     <div className="w-14">
 
     </div>
-    Loading...
+    
 </div>
         
     </div>

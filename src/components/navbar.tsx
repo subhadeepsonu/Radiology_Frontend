@@ -41,7 +41,7 @@ export default function NavBar() {
       {open && <PopupLogin open={open} setOpen={setOpen} />}
       {openSignup && <PopupSignin open={openSignup} setOpen={setOpenSignup} />}
       <Link to="/">
-        <div className="flex justify-center items-center text-4xl font-semibold">
+        <div className="flex justify-center items-center text-2xl font-semibold">
           MedQuizPro
         </div>
       </Link>

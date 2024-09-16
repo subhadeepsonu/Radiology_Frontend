@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Userdash from "./pages/userDash";
-import AdminDash from "./pages/adminDash";
+import Userdash from "./pages/user/userDash";
+import AdminDash from "./pages/admin/adminDash";
 import Category from "./pages/Category";
-import Quiz from "./pages/Quiz";
 import QuizById from "./pages/Quiz.id";
 import Question from "./pages/Question";
 import Submission from "./pages/Submission";
@@ -11,20 +10,22 @@ import ViewQuizById from "./pages/ViewQuizByid";
 import UserRouteProtect from "./routeprotection/userRoute";
 import AdminRouteProtect from "./routeprotection/adminRoute";
 import SubmissionByID from "./pages/SubmissionByid";
-import AdminQuestionPage from "./pages/adminQuestionPage";
-import AdminQuizPage from "./pages/adminQuizPage";
-import AdminCategoryPage from "./pages/adminCategory";
-import AdminFashCards from "./pages/AdminFashCards";
-import AdminUserPage from "./pages/adminUserPage";
-import UserFlashCardsPage from "./pages/UserFlashCards";
-import UserQuestionPage from "./pages/userQuestionPage";
-import UserCategoryPage from "./pages/userCategoryPage";
-import UserQuizPage from "./pages/userQuizPage";
+import AdminQuestionPage from "./pages/admin/adminQuestionPage";
+import AdminQuizPage from "./pages/admin/adminQuizPage";
+import AdminCategoryPage from "./pages/admin/adminCategory";
+import AdminFashCards from "./pages/admin/AdminFashCards";
+import AdminUserPage from "./pages/admin/adminUserPage";
+import UserFlashCardsPage from "./pages/user/UserFlashCards";
+import UserQuestionPage from "./pages/user/userQuestionPage";
+import UserCategoryPage from "./pages/user/userCategoryPage";
+import UserQuizPage from "./pages/user/userQuizPage";
+import ScrollToTop from "./utills/scrolltotop";
 
 export default function App() {
   
   return (
-    
+    <>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/userdash" element={<UserRouteProtect><Userdash /></UserRouteProtect>} />
@@ -45,5 +46,6 @@ export default function App() {
       <Route path="/userdash/Submissions/:id" element={<UserRouteProtect><SubmissionByID /></UserRouteProtect>} />
       <Route path="/userdash/questions" element={<UserRouteProtect><UserQuestionPage /></UserRouteProtect>} />
     </Routes>
+    </>
   )
 }

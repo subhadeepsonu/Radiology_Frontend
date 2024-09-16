@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function PerformanceCard(){
     const navigate = useNavigate()
     return <div className="flex justify-center items-center min-h-52 w-full">
-    <div className="grid grid-cols-4 gap-5">
+    <div className="grid grid-cols-4 gap-5 px-5">
         <div className="w-80 h-28 flex justify-around items-center shadow-sm  rounded-lg border-2 border-gray-100">
             <div className="h-20 w-20 rounded-lg bg-orange-100 flex justify-center items-center">
             
