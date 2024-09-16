@@ -1,12 +1,44 @@
+import { useQuery } from "@tanstack/react-query";
 import AdminQuizCard from "../cards/admin/AdminQuizCard";
-export default function Quizs(){
-    return <div className="w-full h-fit p-2 flex justify-center items-start pl-20 flex-col">
-        
-        <div className="grid grid-cols-4 gap-5">
-                <AdminQuizCard imgurl="https://media.post.rvohealth.io/wp-content/uploads/2017/05/getting-physical-examination_thumb-732x549.jpg" title="Clinical Challenge: Diagnose Like a Pro"></AdminQuizCard>
-                <AdminQuizCard imgurl="https://akm-img-a-in.tosshub.com/indiatoday/images/story/201604/medical-647_042016041651.jpg?VersionId=at35BqMne5IWoXMAIqFds_IqXNPd3U_2   " title="Medical Mastery: From Symptoms to Solutions"></AdminQuizCard>
-                <AdminQuizCard title="Surgical Savvy: Are You Ready for the OR?" imgurl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdSXxBma0eiQOxJ8ov3Gql1ZCztSYepM7RWA&s"></AdminQuizCard>
-                
+import axios from "axios";
+import { baseurl } from "@/utills/consant";
+export default function AdminQuizs(props:{
+    categoryid:string
+}){
+    const QueryCategory = useQuery({
+        queryKey:["category",props.categoryid],
+        queryFn:async()=>{
+            const response = await axios.post(`${baseurl}/quiz/filter`,{
+                categoryid:props.categoryid
+            }
+            ,{
+                headers:{
+                    "Authorization":`${localStorage.getItem("token")}`
+                }
+            })
+            return response.data
+        }
+    })
+    if(QueryCategory.isLoading){
+        return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+            Loading...
         </div>
+    }
+    if(QueryCategory.isError){
+        return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+       Error
+        </div>
+    }
+    if(QueryCategory.data.data.length === 0){
+        return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+            No Quiz
+        </div>
+    }
+    return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+    <div className="grid grid-cols-4 gap-5 w-full px-5">
+    {QueryCategory.data.data.map((quiz:any)=>{
+        return <AdminQuizCard imgurl={quiz.image} title={quiz.name} />
+    })}
+    </div>
     </div>
 }
