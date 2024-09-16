@@ -19,7 +19,7 @@ export default function SideBarBUtton(props:{
     return <div onClick={()=>{
         navigate(props.href)
     }}  className="flex justify-center items-center my-3  ">
-        <div className={`p-3 w-10/12 ${(active)?"bg-purple-500  text-white transition-all duration-300":"hover:bg-purple-100"}  rounded-xl hover:cursor-pointer flex justify-start items-center`}>
+        <div className={`p-3 w-11/12 ${(active)?"bg-purple-500  text-white transition-all duration-300":"hover:bg-purple-100"}  rounded-xl hover:cursor-pointer flex justify-start items-center`}>
         {props.icon} 
         <p className="ml-2 font-medium">{props.path}</p>
         </div>

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import ConfirmAlert from "../Alerts/ConfirmAlert";
 import { useState } from "react";
-
 export default function QuizCard(props:{
     id:String,
     imgurl:string,

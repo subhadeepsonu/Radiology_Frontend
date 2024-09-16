@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import AttemptQuestion from "./AttemptQuestion";
-
 export default function QuestionCard(props:{
     id:String,
     question:string,

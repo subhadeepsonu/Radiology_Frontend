@@ -12,7 +12,7 @@ export default function AdminQuizCard(props:{
 }){
     const [open,setOpen]=useState(false)
     const [editopen,seteditopen] = useState(false)
-    return <div className="h-96 rounded-lg w-80 bg-white border-2 border-gray-100">
+    return <div className="h-96 rounded-lg w-80 bg-white border-2 border-gray-200">
         <ConfirmAlert open={open} setopen={setOpen} text={"Do you want to delete this?"} function={()=>{
         }} />
         <FormPopUp title="Edit Quiz card" form={<EditQuizForm />} open={editopen} setOpen={seteditopen} />
