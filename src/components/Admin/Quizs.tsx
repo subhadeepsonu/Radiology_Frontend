@@ -3,13 +3,15 @@ import AdminQuizCard from "../cards/admin/AdminQuizCard";
 import axios from "axios";
 import { baseurl } from "@/utills/consant";
 export default function AdminQuizs(props:{
-    categoryid:string
+    categoryid:string,
+    name:string
 }){
     const QueryCategory = useQuery({
-        queryKey:["category",props.categoryid],
+        queryKey:["quiz",props.categoryid,props.name],
         queryFn:async()=>{
             const response = await axios.post(`${baseurl}/quiz/filter`,{
-                categoryid:props.categoryid
+                categoryid:props.categoryid,
+                name:props.name
             }
             ,{
                 headers:{
@@ -37,7 +39,7 @@ export default function AdminQuizs(props:{
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
     <div className="grid grid-cols-4 gap-5 w-full px-5">
     {QueryCategory.data.data.map((quiz:any)=>{
-        return <AdminQuizCard imgurl={quiz.image} title={quiz.name} />
+        return <AdminQuizCard id={quiz.id} imgurl={quiz.image} title={quiz.name} />
     })}
     </div>
     </div>

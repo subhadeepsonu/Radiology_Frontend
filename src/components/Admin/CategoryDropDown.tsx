@@ -21,7 +21,7 @@ export default function CategoryDropDown(props: { setCat: any }) {
         return <div className="w-40">Error</div>
     }
     return (
-        <div className="w-40 ">
+        <div className="w-60 ">
             <select
                 id="category"
                 name="category"

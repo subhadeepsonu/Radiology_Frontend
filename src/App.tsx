@@ -33,6 +33,7 @@ export default function App() {
       <Route path="/userdash/quiz" element={<UserRouteProtect><UserQuizPage /></UserRouteProtect>} />
       <Route path="/userdash/flashcards" element={<UserRouteProtect><UserFlashCardsPage /></UserRouteProtect>} />
       <Route path="/userdash/questions" element={<UserRouteProtect><UserQuestionPage /></UserRouteProtect>} />
+      <Route path="*" element={<div className="h-screen w-full flex  justify-center items-center">404 Not Found</div>} />
     </Routes>
     </>
   )

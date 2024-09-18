@@ -4,14 +4,16 @@ import { baseurl } from "@/utills/consant";
 
 import AdminQuestionCard from "../cards/admin/AdminQuestionCard";
 export default function AdminQuestions(props:{
-    categoryid:string
+    categoryid:string,
+    question:string
     
 }) {
     const QueryQuestions = useQuery({
-        queryKey:["questions",props.categoryid],
+        queryKey:["questions",props.categoryid,props.question],
         queryFn:async()=>{
             const response = await axios.post(`${baseurl}/questions/filter`,{
-                categoryid:props.categoryid
+                categoryid:props.categoryid,
+                question:props.question
             },{
                 headers:{
                     "Authorization":`${localStorage.getItem("token")}`
@@ -35,8 +37,8 @@ export default function AdminQuestions(props:{
     if(QueryQuestions.data.data.length > 0){
         return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
     <div className="grid grid-cols-4 gap-5 w-full px-5">
-    {QueryQuestions.data.data.map((question:any)=>{
-        return <AdminQuestionCard question={question.question} />
+    {QueryQuestions.data.data.map((question:any,index:number)=>{
+        return <AdminQuestionCard image={question.image} answer={question.answer} id={question.id} key={index} question={question.question} />
     })}
     </div>
     </div>

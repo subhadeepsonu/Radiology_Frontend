@@ -1,8 +1,12 @@
 import SideBar from "@/components/Admin/sideBar"
+import FormPopUp from "@/components/Alerts/FormPopUp"
 import AdminCategoryCard from "@/components/cards/admin/AdminCategoryCard"
+import AddQuestionForm from "@/components/forms/AddQuestion"
+import { Button } from "@/components/ui/button"
 import { baseurl } from "@/utills/consant"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { useState } from "react"
 
 export default function AdminCategoryPage() {
     const QueryCategory = useQuery({
@@ -16,6 +20,7 @@ export default function AdminCategoryPage() {
             return response.data
         }
     })
+    const [open, setOpen] = useState(false)
     if(QueryCategory.isLoading){
         return <div className="h-screen w-full flex justify-center items-center">
             <SideBar />Loading...</div>
@@ -32,10 +37,14 @@ export default function AdminCategoryPage() {
     if(QueryCategory.data.data.length > 0){
         return (
             <div className="h-screen w-full flex justify-center  items-start pl-44 pt-20">
+                <FormPopUp open={open} setOpen={setOpen} title="Add Category" form={<AddQuestionForm />} />
                 <SideBar />
-                <div className="w-full grid grid-cols-4 gap-5 px-5">
+                <Button onClick={()=>{
+                    setOpen(true)
+                }} className="fixed right-5 bottom-5">Add Category</Button>
+                <div className="w-full grid grid-cols-5 gap-5 px-5">
                     {QueryCategory.data.data.map((category:any)=>{
-                        return <AdminCategoryCard name={category.name} />
+                        return <AdminCategoryCard id={category.id} name={category.name} />
                     })}
                     
                 </div>

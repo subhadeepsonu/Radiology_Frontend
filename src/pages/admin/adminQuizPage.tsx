@@ -1,15 +1,32 @@
 import SideBar from "@/components/Admin/sideBar"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import CatgeoryDropDown from "@/components/Admin/CategoryDropDown"
 import AdminQuizs from "@/components/Admin/Quizs"
+import { Input } from "@/components/ui/input"
+import debounce from "lodash.debounce"
+import { Button } from "@/components/ui/button"
+import AddQuestionForm from "@/components/forms/AddQuestion"
+import FormPopUp from "@/components/Alerts/FormPopUp"
+
 export default function AdminQuizPage() {
-    const [categoryid,setCat] = useState("")
+        const [categoryid,setCat] = useState("")
+        const [name,setName] = useState("")
+        const [open, setOpen] = useState(false)
+    const DebounceChange = useCallback(debounce((value)=>{
+            setName(value)
+    },500),[])
     return <div className="pt-20">
         <SideBar />
+        <FormPopUp form={<AddQuestionForm />} open={open} setOpen={setOpen} title="Add Quiz" />
+        <Button onClick={()=>{
+          setOpen(true)      
+        }} className="fixed right-5 bottom-5">Add Quiz</Button>
         <div className="pl-48  flex justify-between items-center px-5">
-        <p className="font-medium text-xl">Quizs</p>
+        <Input onChange={(e)=>{
+                    DebounceChange(e.target.value)
+            }} placeholder="Search" className="w-60" />
             <CatgeoryDropDown setCat={setCat} />
         </div>
-        <AdminQuizs categoryid={categoryid} />
+        <AdminQuizs name={name} categoryid={categoryid} />
         </div>
 }

@@ -4,13 +4,16 @@ import axios from "axios"
 import AdminFlashCard from "../cards/admin/AdminFlashCard"
 
 export default function AdminFlashCards(props:{
-    categoryid:string
+    categoryid:string,
+    question:string
 }){
     const QueryFlashcards = useQuery({
-        queryKey:["flashcards",props.categoryid],
+        queryKey:["flashcards",props.categoryid,props.question],
         queryFn:async()=>{
+            console.log("flashcards")
             const response = await axios.post(`${baseurl}/flashcards/filter`,{
-                categoryid:props.categoryid
+                categoryid:props.categoryid,
+                question:props.question
             },{
                 headers:{
                     "Authorization":`${localStorage.getItem("token")}`
@@ -35,9 +38,9 @@ export default function AdminFlashCards(props:{
         </div>
     }
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44  flex-col">
-    <div className="grid grid-cols-4 gap-5 w-full px-5">
+    <div className="grid grid-cols-5 gap-5 w-full px-5">
     {QueryFlashcards.data.data.map((flashcard:any)=>{
-        return <AdminFlashCard question={flashcard.question} />
+        return <AdminFlashCard id={flashcard.id} answer={flashcard.answer} question={flashcard.question} />
     })}
     </div>
     </div>

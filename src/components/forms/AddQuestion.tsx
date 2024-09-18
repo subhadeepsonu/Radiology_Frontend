@@ -35,7 +35,6 @@ export default function AddQuestionForm(){
               <FormControl>
                 <Input className="w-72" placeholder="Question" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
