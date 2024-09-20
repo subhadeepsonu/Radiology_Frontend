@@ -39,7 +39,7 @@ export default function AdminQuizs(props:{
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
     <div className="grid grid-cols-4 gap-5 w-full px-5">
     {QueryCategory.data.data.map((quiz:any)=>{
-        return <AdminQuizCard id={quiz.id} imgurl={quiz.image} title={quiz.name} />
+        return <AdminQuizCard id={quiz.id}  title={quiz.name} />
     })}
     </div>
     </div>

@@ -1,4 +1,6 @@
 import ConfirmAlert from "@/components/Alerts/ConfirmAlert";
+import FormPopUp from "@/components/Alerts/FormPopUp";
+import EditCategory from "@/components/forms/EditCategory";
 import { Button } from "@/components/ui/button";
 import { baseurl } from "@/utills/consant";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,6 +12,7 @@ export default function AdminCategoryCard(props:{
     name:string
 }) {
     const[open,setOpen] = useState(false)
+    const [editopen,SetEditOpen] = useState(false)
     const queryClient = useQueryClient()
     const MuatateDelete = useMutation({
         mutationFn:async()=>{
@@ -38,12 +41,15 @@ export default function AdminCategoryCard(props:{
     })
     return (
         <div className="h-24  border-2 border-gray-200 rounded-lg w-full flex flex-col justify-around items-center">
-            <ConfirmAlert open={open} setopen={setOpen} loading={MuatateDelete.isPending} text={"Are you sure ?"} function={()=>{
+            <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Category" form={<EditCategory name={props.name} />} />
+            <ConfirmAlert  open={open} setopen={setOpen} loading={MuatateDelete.isPending} text={"Are you sure ?"} function={()=>{
                 MuatateDelete.mutate()
             }}  />
             <p className="text-center font-medium text-lg">{props.name}</p>
             <div className=" flex justify-around items-center w-full">
-                <Button>Edit</Button>
+                <Button onClick={()=>{
+                    SetEditOpen(true)
+                }}>Edit</Button>
                 <Button variant={"destructive"} onClick={()=>{
                     setOpen(true)
                 }}>Delete</Button>

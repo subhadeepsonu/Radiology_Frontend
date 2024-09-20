@@ -1,7 +1,7 @@
 import SideBar from "@/components/Admin/sideBar"
 import FormPopUp from "@/components/Alerts/FormPopUp"
 import AdminCategoryCard from "@/components/cards/admin/AdminCategoryCard"
-import AddQuestionForm from "@/components/forms/AddQuestion"
+import AddCategory from "@/components/forms/AddCategory"
 import { Button } from "@/components/ui/button"
 import { baseurl } from "@/utills/consant"
 import { useQuery } from "@tanstack/react-query"
@@ -37,14 +37,14 @@ export default function AdminCategoryPage() {
     if(QueryCategory.data.data.length > 0){
         return (
             <div className="h-screen w-full flex justify-center  items-start pl-44 pt-20">
-                <FormPopUp open={open} setOpen={setOpen} title="Add Category" form={<AddQuestionForm />} />
+                <FormPopUp open={open} setOpen={setOpen} title="Add Category" form={<AddCategory setOpen={setOpen} />} />
                 <SideBar />
                 <Button onClick={()=>{
                     setOpen(true)
                 }} className="fixed right-5 bottom-5">Add Category</Button>
                 <div className="w-full grid grid-cols-5 gap-5 px-5">
-                    {QueryCategory.data.data.map((category:any)=>{
-                        return <AdminCategoryCard id={category.id} name={category.name} />
+                    {QueryCategory.data.data.map((category:any,index:number)=>{
+                        return <AdminCategoryCard key={index} id={category.id} name={category.name} />
                     })}
                     
                 </div>

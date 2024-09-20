@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import debounce from "lodash.debounce";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
-import AddQuestionForm from "@/components/forms/AddQuestion";
 import FormPopUp from "@/components/Alerts/FormPopUp";
+import AddUser from "@/components/forms/AddUser";
 export default function AdminUserPage() {
     const [name, setName] = useState("");
     const [open, setOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function AdminUserPage() {
     },500),[])
    return <div className="pt-20">
     <SideBar />
-    <FormPopUp form={<AddQuestionForm />} open={open} setOpen={setOpen} title="Add  User" />
+    <FormPopUp form={<AddUser setOpen={setOpen} />} open={open} setOpen={setOpen} title="Add  User" />
     <Button onClick={()=>{
       setOpen(true)  
     }} className="fixed right-5 bottom-5">Add User</Button>

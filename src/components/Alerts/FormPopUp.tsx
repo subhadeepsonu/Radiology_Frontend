@@ -13,7 +13,6 @@ export default function FormPopUp(props:{
                 <Button className="absolute top-2 left-2 h-fit w-fit p-2 rounded-full" variant={"destructive"} onClick={()=>{
                     props.setOpen(false)
                 }}><IoMdCloseCircleOutline className="text-2xl" /></Button>
-            
                 <p className="text-lg font-medium">{props.title}</p></div>
         {props.form}
         </div>

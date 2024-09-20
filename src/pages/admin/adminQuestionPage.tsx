@@ -17,7 +17,7 @@ export default function AdminQuestionPage(){
     },500),[])
    return <div className="pt-20">
          <SideBar />
-         <FormPopUp form={<AddQuestionForm />} open={open} setOpen={setOpen} title="Add Question" />
+         <FormPopUp form={<AddQuestionForm setOpen={setOpen} />} open={open} setOpen={setOpen} title="Add Question" />
          <Button onClick={()=>{
                    setOpen(true)
          }} className="fixed right-5 bottom-5">Add Question</Button>

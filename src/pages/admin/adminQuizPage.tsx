@@ -5,8 +5,8 @@ import AdminQuizs from "@/components/Admin/Quizs"
 import { Input } from "@/components/ui/input"
 import debounce from "lodash.debounce"
 import { Button } from "@/components/ui/button"
-import AddQuestionForm from "@/components/forms/AddQuestion"
 import FormPopUp from "@/components/Alerts/FormPopUp"
+import AddQuiz from "@/components/forms/Addquiz"
 
 export default function AdminQuizPage() {
         const [categoryid,setCat] = useState("")
@@ -17,7 +17,7 @@ export default function AdminQuizPage() {
     },500),[])
     return <div className="pt-20">
         <SideBar />
-        <FormPopUp form={<AddQuestionForm />} open={open} setOpen={setOpen} title="Add Quiz" />
+        <FormPopUp form={<AddQuiz setOpen={setOpen} />} open={open} setOpen={setOpen} title="Add Quiz" />
         <Button onClick={()=>{
           setOpen(true)      
         }} className="fixed right-5 bottom-5">Add Quiz</Button>

@@ -12,7 +12,6 @@ import { toast } from "sonner";
 
 export default function AdminQuizCard(props:{
     id:string,
-    imgurl:string,
     title:string
 }){
     const [open,setOpen]=useState(false)
@@ -43,12 +42,12 @@ export default function AdminQuizCard(props:{
             toast.error("Something went wrong")
         }
     })
-    return <div className="h-96 rounded-lg w-80 bg-white border-2 border-gray-200">
+    return <div className="h-32 rounded-lg w-80 bg-white border-2 border-gray-200">
         <ConfirmAlert loading={MutateDelete.isPending}  open={open} setopen={setOpen} text={"Do you want to delete this?"} function={()=>{
             MutateDelete.mutate()
         }} />
         <FormPopUp title="Edit Quiz card" form={<EditQuizForm />} open={editopen} setOpen={seteditopen} />
-        <img src={props.imgurl} className="h-64  w-full p-2 object-cover"></img>
+        
         <div className="flex flex-col justify-around items-center h-32" >
             <p className="text-start w-full px-2 font-medium ">{props.title}</p>
             <div className="w-full flex justify-around px-2 items-center">

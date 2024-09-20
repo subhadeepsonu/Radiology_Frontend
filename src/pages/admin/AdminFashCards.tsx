@@ -6,7 +6,7 @@ import { useCallback,  useState } from "react"
 import debounce from "lodash.debounce"
 import { Button } from "@/components/ui/button"
 import FormPopUp from "@/components/Alerts/FormPopUp"
-import AddQuestionForm from "@/components/forms/AddQuestion"
+import AddFlashCard from "@/components/forms/AddFlashCard"
 
 
 export default function AdminFashCardsPage() {
@@ -19,7 +19,7 @@ export default function AdminFashCardsPage() {
         }, 500),[])
     return <div>
         <SideBar />
-        <FormPopUp form={<AddQuestionForm />} open={open} setOpen={setOpen} title="Add FlashCard" />
+        <FormPopUp form={<AddFlashCard setOpen={setOpen} />} open={open} setOpen={setOpen} title="Add FlashCard" />
         <Button onClick={()=>{
             setOpen(true)
         }} className="fixed right-5 bottom-5">Add Flashcard</Button>

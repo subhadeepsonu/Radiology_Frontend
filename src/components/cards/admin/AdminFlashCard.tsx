@@ -1,4 +1,6 @@
 import ConfirmAlert from "@/components/Alerts/ConfirmAlert";
+import FormPopUp from "@/components/Alerts/FormPopUp";
+import EditFlashCardFrom from "@/components/forms/EditFlashCard";
 import { Button } from "@/components/ui/button";
 import { baseurl } from "@/utills/consant";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -12,6 +14,7 @@ export default function AdminFlashCard(props:{
     answer:string,
 }){
     const [open,setOpen] = useState(false)
+    const [editopen,SetEditOpen] = useState(false)
     const queryClient = useQueryClient()
     const MutateDelete = useMutation({
         mutationFn:async ()=>{
@@ -42,13 +45,16 @@ export default function AdminFlashCard(props:{
         <ConfirmAlert open={open} setopen={setOpen} text={"Are you sure ?"} loading={MutateDelete.isPending} function={()=>{
             MutateDelete.mutate()
         }} />
+        <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Flashcard" form={<EditFlashCardFrom />} />
         <div className="flex flex-col justify-around items-start w-full">
         <p className="truncate text-ellipsis w-full font-medium">{props.question}</p>
         <p className="truncate text-ellipsis w-full">{props.answer}</p>
         </div>
         <div className="w-full flex justify-around items-center">
         <Button size={"sm"}>View</Button>
-        <Button variant={"secondary"} size={"sm"}>Edit</Button>
+        <Button onClick={()=> {
+            SetEditOpen(true)
+        }} variant={"secondary"} size={"sm"}>Edit</Button>
         <Button size={"sm"} variant={"destructive"} onClick={()=>{
             setOpen(true)
         }}>Delete</Button>

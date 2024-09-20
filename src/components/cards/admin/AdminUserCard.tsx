@@ -1,4 +1,6 @@
 import ConfirmAlert from "@/components/Alerts/ConfirmAlert";
+import FormPopUp from "@/components/Alerts/FormPopUp";
+import EditUserForm from "@/components/forms/EditUser";
 import { Button } from "@/components/ui/button";
 import { baseurl } from "@/utills/consant";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,6 +16,7 @@ export default function AdminUserCard(props:{
 }){
    const [admin,setAdmin] = useState(false)
    const [open,setOpen] = useState(false)
+   const [editopen,SetEditOpen] = useState(false)
    useEffect(()=>{
       if(props.role === "admin"){
          setAdmin(true)
@@ -32,11 +35,11 @@ export default function AdminUserCard(props:{
          })
          return response.data
       },
-      onSuccess:(data)=>{
+      onSuccess:async (data)=>{
          if(data.success){
             toast.success("User Deleted Successfully")
             setOpen(false)
-            queryClient.invalidateQueries({
+            await queryClient.invalidateQueries({
                queryKey:["user"]
             })
          }
@@ -54,6 +57,7 @@ export default function AdminUserCard(props:{
       <ConfirmAlert loading={MutateDelete.isPending} open={open} setopen={setOpen} text={"Are you sure ?"} function={()=>{
          MutateDelete.mutate()
       }} />
+      <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit User" form={<EditUserForm email={props.email} password={""} role={props.role} username={props.name} />} />
       <div className="flex flex-col justify-around items-start w-full">
       <p className="text-lg font-medium">{props.name}</p>
       <p className="w-full truncate text-ellipsis">{props.email}</p>
@@ -61,7 +65,9 @@ export default function AdminUserCard(props:{
       </div>
       <div className="flex justify-around items-center w-full">
          <Button  size={"sm"}>View</Button>
-         <Button variant={"secondary"} size={"sm"}>Edit</Button>
+         <Button onClick={()=>{
+            SetEditOpen(true)
+         }} variant={"secondary"} size={"sm"}>Edit</Button>
          <Button size={"sm"} variant={"destructive"} onClick={()=>{
             setOpen(true)
          }}>Delete</Button>

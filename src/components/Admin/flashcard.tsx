@@ -39,8 +39,8 @@ export default function AdminFlashCards(props:{
     }
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44  flex-col">
     <div className="grid grid-cols-5 gap-5 w-full px-5">
-    {QueryFlashcards.data.data.map((flashcard:any)=>{
-        return <AdminFlashCard id={flashcard.id} answer={flashcard.answer} question={flashcard.question} />
+    {QueryFlashcards.data.data.map((flashcard:any,index:number)=>{
+        return <AdminFlashCard key={index} id={flashcard.id} answer={flashcard.answer} question={flashcard.question} />
     })}
     </div>
     </div>

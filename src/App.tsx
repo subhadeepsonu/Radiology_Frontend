@@ -14,6 +14,7 @@ import UserQuestionPage from "./pages/user/userQuestionPage";
 import UserCategoryPage from "./pages/user/userCategoryPage";
 import UserQuizPage from "./pages/user/userQuizPage";
 import ScrollToTop from "./utills/scrolltotop";
+import ImageUpload from "./pages/test";
 
 export default function App() {
   
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/userdash/quiz" element={<UserRouteProtect><UserQuizPage /></UserRouteProtect>} />
       <Route path="/userdash/flashcards" element={<UserRouteProtect><UserFlashCardsPage /></UserRouteProtect>} />
       <Route path="/userdash/questions" element={<UserRouteProtect><UserQuestionPage /></UserRouteProtect>} />
+      <Route path="/test" element={<ImageUpload />} />
       <Route path="*" element={<div className="h-screen w-full flex  justify-center items-center">404 Not Found</div>} />
     </Routes>
     </>
