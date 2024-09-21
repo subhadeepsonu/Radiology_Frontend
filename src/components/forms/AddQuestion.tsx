@@ -31,10 +31,10 @@ export default function AddQuestionForm(props:{
       return;
     }
   
-    setImage(file); // You can still update the state if needed elsewhere.
+    setImage(file); 
   
     const formData = new FormData();
-    formData.append('file', file); // Use the `file` variable directly.
+    formData.append('file', file); 
     formData.append('upload_preset', 'Radiology');
   
     try {

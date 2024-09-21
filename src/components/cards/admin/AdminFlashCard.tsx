@@ -7,14 +7,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
+import AdminFlashCardPopUp from "./AdminFlashCardPopUp";
 
 export default function AdminFlashCard(props:{
     id:string,
     question:string,
     answer:string,
+    categoryid:string,
+    description:string
 }){
     const [open,setOpen] = useState(false)
     const [editopen,SetEditOpen] = useState(false)
+    const [viewopen,setViewOpen] = useState(false)
     const queryClient = useQueryClient()
     const MutateDelete = useMutation({
         mutationFn:async ()=>{
@@ -41,21 +45,24 @@ export default function AdminFlashCard(props:{
             toast.error("Something went wrong")
         }
     })
-    return <div className="h-24 border-2 border-gray-200 rounded-lg w-full flex flex-col justify-around items-start pl-2">
+    return <div className="h-32 border-2 border-gray-200 rounded-lg w-full flex flex-col justify-around items-start pl-2">
         <ConfirmAlert open={open} setopen={setOpen} text={"Are you sure ?"} loading={MutateDelete.isPending} function={()=>{
             MutateDelete.mutate()
         }} />
-        <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Flashcard" form={<EditFlashCardFrom />} />
+        <FormPopUp open={viewopen} setOpen={setViewOpen} title="FlashCard" form={<AdminFlashCardPopUp answer={props.answer} description={props.description} question={props.question} />} />
+        <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Flashcard" form={<EditFlashCardFrom  answer={props.answer} categoryid={props.categoryid} description={props.description} id={props.id} question={props.question} setOpen={SetEditOpen}  />} />
         <div className="flex flex-col justify-around items-start w-full">
         <p className="truncate text-ellipsis w-full font-medium">{props.question}</p>
         <p className="truncate text-ellipsis w-full">{props.answer}</p>
         </div>
         <div className="w-full flex justify-around items-center">
-        <Button size={"sm"}>View</Button>
+        <Button onClick={()=>{
+            setViewOpen(true)
+        }} >View</Button>
         <Button onClick={()=> {
             SetEditOpen(true)
-        }} variant={"secondary"} size={"sm"}>Edit</Button>
-        <Button size={"sm"} variant={"destructive"} onClick={()=>{
+        }} variant={"secondary"} >Edit</Button>
+        <Button  variant={"destructive"} onClick={()=>{
             setOpen(true)
         }}>Delete</Button>
         </div>

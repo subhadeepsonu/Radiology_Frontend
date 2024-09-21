@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import AdminQuizCard from "../cards/admin/AdminQuizCard";
 import axios from "axios";
 import { baseurl } from "@/utills/consant";
+import Loading from "../loading";
 export default function AdminQuizs(props:{
     categoryid:string,
     name:string
@@ -23,8 +24,17 @@ export default function AdminQuizs(props:{
     })
     if(QueryCategory.isLoading){
         return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
-            Loading...
-        </div>
+        <div className="grid grid-cols-4 gap-5 w-full px-5">
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+</div>
+    </div>
     }
     if(QueryCategory.isError){
         return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
@@ -39,7 +49,7 @@ export default function AdminQuizs(props:{
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
     <div className="grid grid-cols-4 gap-5 w-full px-5">
     {QueryCategory.data.data.map((quiz:any)=>{
-        return <AdminQuizCard id={quiz.id}  title={quiz.name} />
+        return <AdminQuizCard image={quiz.image} categoryid={quiz.categoryid} difficulty={quiz.difficulty} id={quiz.id}  title={quiz.name} />
     })}
     </div>
     </div>

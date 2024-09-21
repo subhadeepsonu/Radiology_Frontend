@@ -9,10 +9,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseurl } from "@/utills/consant";
 import { toast } from "sonner";
+import EditQuiz from "@/components/forms/EditQuiz";
 
 export default function AdminQuizCard(props:{
     id:string,
-    title:string
+    title:string,
+    categoryid:string,
+    difficulty:string,
+    image:string
 }){
     const [open,setOpen]=useState(false)
     const [editopen,seteditopen] = useState(false)
@@ -46,11 +50,12 @@ export default function AdminQuizCard(props:{
         <ConfirmAlert loading={MutateDelete.isPending}  open={open} setopen={setOpen} text={"Do you want to delete this?"} function={()=>{
             MutateDelete.mutate()
         }} />
-        <FormPopUp title="Edit Quiz card" form={<EditQuizForm />} open={editopen} setOpen={seteditopen} />
+        <FormPopUp title="Edit Quiz card" form={<EditQuiz id={props.id} categoryid={props.categoryid} difficulty={props.difficulty as any} image={props.image} name={props.title} setOpen={seteditopen} />} open={editopen} setOpen={seteditopen} />
         
         <div className="flex flex-col justify-around items-center h-32" >
             <p className="text-start w-full px-2 font-medium ">{props.title}</p>
             <div className="w-full flex justify-around px-2 items-center">
+            <Button  >view</Button>
                 <Button onClick={()=>{
                     seteditopen(true)
                 }} variant={"secondary"}>Edit</Button>
@@ -58,7 +63,7 @@ export default function AdminQuizCard(props:{
                     setOpen(true)
                 }} variant={"destructive"}>Delete</Button>
                 <Link to={"quiz/2"}>
-                <Button  >Open</Button>
+                
                 </Link>
             </div>
         </div>

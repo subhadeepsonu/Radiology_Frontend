@@ -53,22 +53,23 @@ export default function AdminUserCard(props:{
          toast.error("Something went wrong")
       }
    })
+   type role = "admin" | "user"
    return <div className="h-32 w-full border-2 border-gray-200 rounded-lg flex flex-col justify-around items-start pl-2">
       <ConfirmAlert loading={MutateDelete.isPending} open={open} setopen={setOpen} text={"Are you sure ?"} function={()=>{
          MutateDelete.mutate()
       }} />
-      <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit User" form={<EditUserForm email={props.email} password={""} role={props.role} username={props.name} />} />
+      <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit User" form={<EditUserForm id={props.id} setOpen={SetEditOpen} email={props.email}  role={props.role as role} username={props.name} />} />
       <div className="flex flex-col justify-around items-start w-full">
       <p className="text-lg font-medium">{props.name}</p>
       <p className="w-full truncate text-ellipsis">{props.email}</p>
       <p className={`${(admin)?"text-red-500":"text-green-500"}`}>{props.role}</p>
       </div>
       <div className="flex justify-around items-center w-full">
-         <Button  size={"sm"}>View</Button>
+         
          <Button onClick={()=>{
             SetEditOpen(true)
-         }} variant={"secondary"} size={"sm"}>Edit</Button>
-         <Button size={"sm"} variant={"destructive"} onClick={()=>{
+         }} variant={"secondary"} >Edit</Button>
+         <Button  variant={"destructive"} onClick={()=>{
             setOpen(true)
          }}>Delete</Button>
       </div>

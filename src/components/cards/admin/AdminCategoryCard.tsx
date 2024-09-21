@@ -40,16 +40,17 @@ export default function AdminCategoryCard(props:{
         }
     })
     return (
-        <div className="h-24  border-2 border-gray-200 rounded-lg w-full flex flex-col justify-around items-center">
-            <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Category" form={<EditCategory name={props.name} />} />
+        <div className="h-32  border-2 border-gray-200 rounded-lg w-full flex flex-col justify-around items-center">
+            <FormPopUp open={editopen} setOpen={SetEditOpen} title="Edit Category" form={<EditCategory setOpen={SetEditOpen} id={props.id} name={props.name} />} />
             <ConfirmAlert  open={open} setopen={setOpen} loading={MuatateDelete.isPending} text={"Are you sure ?"} function={()=>{
                 MuatateDelete.mutate()
             }}  />
             <p className="text-center font-medium text-lg">{props.name}</p>
             <div className=" flex justify-around items-center w-full">
-                <Button onClick={()=>{
+                <Button  variant={"secondary"} onClick={()=>{
                     SetEditOpen(true)
                 }}>Edit</Button>
+                
                 <Button variant={"destructive"} onClick={()=>{
                     setOpen(true)
                 }}>Delete</Button>

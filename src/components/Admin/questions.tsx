@@ -3,6 +3,7 @@ import axios from "axios";
 import { baseurl } from "@/utills/consant";
 
 import AdminQuestionCard from "../cards/admin/AdminQuestionCard";
+import Loading from "../loading";
 export default function AdminQuestions(props:{
     categoryid:string,
     question:string
@@ -23,8 +24,18 @@ export default function AdminQuestions(props:{
         }
     })
     if(QueryQuestions.isLoading){
-        return  <div className="h-screen w-full flex justify-center items-center">
-            Loading...</div>
+        return  <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+        <div className="grid grid-cols-4 gap-5 w-full px-5">
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+</div>
+    </div>
     }
     if(QueryQuestions.isError){
         return  <div className="h-screen w-full flex justify-center items-center">
@@ -38,7 +49,7 @@ export default function AdminQuestions(props:{
         return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
     <div className="grid grid-cols-4 gap-5 w-full px-5">
     {QueryQuestions.data.data.map((question:any,index:number)=>{
-        return <AdminQuestionCard image={question.image} answer={question.answer} id={question.id} key={index} question={question.question} />
+        return <AdminQuestionCard categoryid={question.categoryid} description={question.discription} difficulty={question.difficulty} keyword1={question.keyword1} keyword2={question.keyword2} keyword3={question.keyword3} image={question.image} answer={question.answer} id={question.id} key={index} question={question.question} />
     })}
     </div>
     </div>

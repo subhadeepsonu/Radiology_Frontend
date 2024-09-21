@@ -2,6 +2,7 @@ import { baseurl } from "@/utills/consant"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import AdminFlashCard from "../cards/admin/AdminFlashCard"
+import Loading from "../loading"
 
 export default function AdminFlashCards(props:{
     categoryid:string,
@@ -23,8 +24,17 @@ export default function AdminFlashCards(props:{
         }
     })
     if(QueryFlashcards.isLoading){
-        return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 pt-20 flex-col">
-            Loading...
+        return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44 flex-col">
+            <div className="grid grid-cols-4 gap-5 w-full px-5">
+                <Loading />
+                <Loading />
+                <Loading />
+                <Loading />
+                <Loading />
+                <Loading />
+                <Loading />
+                <Loading />
+    </div>
         </div>
     }
     if(QueryFlashcards.isError){
@@ -38,9 +48,9 @@ export default function AdminFlashCards(props:{
         </div>
     }
     return <div className="w-full h-screen p-2 flex  justify-start  items-center pl-44  flex-col">
-    <div className="grid grid-cols-5 gap-5 w-full px-5">
+    <div className="grid grid-cols-4 gap-5 w-full px-5">
     {QueryFlashcards.data.data.map((flashcard:any,index:number)=>{
-        return <AdminFlashCard key={index} id={flashcard.id} answer={flashcard.answer} question={flashcard.question} />
+        return <AdminFlashCard categoryid={flashcard.categoryid} description={flashcard.discription} key={index} id={flashcard.id} answer={flashcard.answer} question={flashcard.question} />
     })}
     </div>
     </div>

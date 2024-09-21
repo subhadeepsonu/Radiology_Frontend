@@ -16,7 +16,7 @@ export default function QuizCard(props:{
         <div className="absolute h-8 font-medium w-fit px-2 flex justify-center items-center top-2 right-2 rounded-full bg-purple-100 text-purple-600 border-2">
             {props.category}
         </div>
-        <ConfirmAlert text={"Do you want to attempt this quiz"} open={open} setopen={setOpen}function={()=>{
+        <ConfirmAlert loading={false} text={"Do you want to attempt this quiz"} open={open} setopen={setOpen}function={()=>{
             navigate(`/userdash/quiz/${props.id}`)
         }} />
         <img src={props.imgurl} className="h-64  w-full p-2 object-cover"></img>

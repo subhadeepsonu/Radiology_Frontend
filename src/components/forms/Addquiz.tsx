@@ -149,7 +149,7 @@ export default function AddQuiz(props:{
         <FormField
           control={form.control}
           name="categoryid"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
